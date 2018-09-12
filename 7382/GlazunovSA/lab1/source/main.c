@@ -6,6 +6,22 @@
 int strtoint(std::string text,int size);
 //#define TEST          //for illustation of recursion
 #define SCRIPT_TEST   //for runtest.sh
+bool is_number(std::string text)
+{
+	int mas[10]={2,1,4,7,4,8,3,6,4,7};
+	if((text[0]!='-'&&text.size()<10)||(text[0]=='-'&&text.size()<11))
+		return true;
+	int i=0,j=0;
+	if(text[0]=='-')
+		i=1;
+	int highpoint=10+i;
+	for(;i<highpoint;i++)
+	{
+		if(text[i]>mas[j++])
+			return false;
+	}
+	return true;
+}
 int multiply(std::string text,int &shift,int pad,int bonus_pad)
 {
     int i=shift,size=0,total;
@@ -102,7 +118,8 @@ int strtoint(std::string text,int size) {       //this function is like atoi in 
     {
         total+=((int)(text[i])-'0')*pow(10,size-i-1);
     }
-    if((text[0]!='-'&&size>9)||(size>10&&text[0]=='-'))//compare size of number with normal situation
+    //if((text[0]!='-'&&size>9)||(size>10&&text[0]=='-'))//compare size of number with normal situation
+    if(!is_number(text))
 {
 #ifdef SCRIPT_TEST
     FILE *f;
