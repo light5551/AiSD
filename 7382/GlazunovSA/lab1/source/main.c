@@ -184,6 +184,12 @@ bool textcorrect(std::string text){                     //this function checks s
 
     }
 
+    for(int i=0;i<text.size();i++)
+    	{
+    		if(i!=0)
+    			if(text[i]=='-'&&text[i-1]!='+'&&text[i-1]!='*')
+    				return false;
+    	}
 return true;    
 }
 
