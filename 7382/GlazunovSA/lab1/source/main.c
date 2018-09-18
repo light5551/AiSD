@@ -5,7 +5,7 @@
 #include<cmath>//for POW
 int strtoint(std::string text,int size);
 //#define TEST          //for illustation of recursion
-#define SCRIPT_TEST   //for runtest.sh
+//#define SCRIPT_TEST   //for runtest.sh
 bool is_number(std::string text)
 {
 	int max_value[10]={2,1,4,7,4,8,3,6,4,7};
@@ -27,7 +27,12 @@ bool is_number(std::string text)
 }
 void find_size_of_int(std::string text,int &i,int &size)
 {
-while((text[i]<='9'&&text[i]>='0')||text[i]=='-')//it's a search of number in string
+
+    if(text[i] == '-') {
+        size++;
+        i++;
+    }
+    while(isdigit(text[i]))
     {
         i++;
         size++;
@@ -82,7 +87,7 @@ int recmath(std::string text,int shift,int pad) {//the first recursion
     if(text[shift]=='+'){
         int curcheck=recmath(text,shift+1,++pad);
        
-        if(total>INT_MAX-curcheck)
+        if(total>INT_MAX-abs(curcheck))
 {
 #ifdef SCRIPT_TEST
     FILE *f;
@@ -207,8 +212,34 @@ int main()
     	text.erase (i,1);
     	i--;
     	}   
-    bool iscorrect=textcorrect(text);
+    
 
+for(int i=0; i<text.size(); i++)
+        if(text[i]=='-')
+        {
+            if(text[i+1]=='-')
+            {
+                text.erase (i,1);
+                text[i]='+';
+                i--;
+
+            }
+        }
+        
+        for(int i=0;i<text.size();i++)
+    {
+        if(i&&text[i]=='-')
+            if(text[i-1]=='+'||text[i-1]=='*')
+            {
+                continue;
+            }
+            else if(isdigit(text[i-1]))
+            {
+                text.insert(i,"+");
+            }
+    }
+    
+        bool iscorrect=textcorrect(text);
     if(iscorrect)
     fin=recmath(text,0,0);
 #ifdef SCRIPT_TEST
