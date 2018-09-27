@@ -1,10 +1,9 @@
 #include <iostream>
-//#include <stack>//for stack))))
 #include <string>
 #include <cstdio>
-#include "list.cpp"
-//#define SCRIPT_TEST
-#define TEST_ALG
+#include "list.cpp"//class,where there is list :)
+#define SCRIPT_TEST
+//#define TEST_ALG
 bool check_next_symbol(std::string text,int shift)				//true- ( A )
 {																//false- ( )
 	for(int i=shift;i<text.size()&&text[i]!=')';i++)			
@@ -21,7 +20,7 @@ std::string input(){
 	return text;
 }
 
-bool textcorrect(std::string text)
+bool istextcorrect(std::string text)
 {
 	int sum=0;
 	for(int i=0;i<text.size();i++)
@@ -47,7 +46,7 @@ std::cout<<"Hello,I am checker of brackets.Enter..."<<std::endl;
 #endif
 std::string text=input();
 int pad=0;
-if(first_correct_bracket=textcorrect(text))
+if(first_correct_bracket=istextcorrect(text))
 for(int i=0;i<text.size();i++)
 {
 	#ifdef TEST_ALG
@@ -68,13 +67,12 @@ for(int i=0;i<text.size();i++)
 	{
 		stk.push(')',false);
 
-
 	}
 }
 
-	if(first_correct_bracket) 				//if stack has something,it's error 
-		{												//because otherwise it would mean
-			#ifdef SCRIPT_TEST							//number of '(' doesnt equal number of ')'
+	if(first_correct_bracket) 						 
+		{												
+			#ifdef SCRIPT_TEST						
  			FILE *f;									
     		f = fopen("output_of_lab2.txt","wt");		
     		fprintf(f, "%d",stk.count());						

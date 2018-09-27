@@ -78,8 +78,8 @@ let point=$point+1
 ./lab$number < ./tests/file$point.txt
 read  d < $file 
 if [ $d == 3 ]
-then echo TEST#$point success output:$d [NOT correct]
-else echo TEST#$point wrong output:$d [NOT correct]
+then echo TEST#$point success output:$d [correct]
+else echo TEST#$point wrong output:$d [correct]
 fi
 let point=$point+1
 ########################################

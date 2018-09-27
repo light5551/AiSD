@@ -1,12 +1,12 @@
 #include <iostream>
-struct left_bracket{
+struct left_bracket{					//it's left son
 	bool is_atom;
 	struct el_of_list*element;
 };
-struct right_bracket{
+struct right_bracket{					//it's right son
 	struct el_of_list*element;
 };
-struct el_of_list{
+struct el_of_list{							//no brothers
 struct left_bracket*left;
 struct right_bracket*right;
 };
@@ -17,12 +17,17 @@ private:
 	struct el_of_list* list;
 	int size_;
 public:
-	Mylist(){
+	Mylist()
+	{
 		list = new struct el_of_list;
 		list->left=NULL;
 		list->right=NULL;
 		el = list;
 		size_=0;
+	}
+	~Mylist()
+	{
+			delete_list(list);
 	}
 	int size()
 	{
@@ -75,5 +80,26 @@ public:
 				return count();
 			}
 
+	}
+
+	void delete_list(struct el_of_list*cur_el)
+	{
+		if(cur_el->left==NULL&&cur_el->right==NULL)
+			{	
+				if(cur_el)
+					delete cur_el;
+			}
+		if(cur_el->left!=NULL)
+			{
+				delete_list(cur_el->left->element);
+				if(cur_el->left)
+					delete cur_el->left;
+			}
+		if(cur_el->right!=NULL)
+			{
+				delete_list(cur_el->right->element);
+				if(cur_el->right)
+					delete cur_el->right;
+			}
 	}
 };
