@@ -4,11 +4,11 @@
 #include "list.cpp"//class,where there is list :)
 #define SCRIPT_TEST
 //#define TEST_ALG
-bool check_next_symbol(std::string text,int shift)				//true- ( A )
+bool check_next_symbol(std::string &text,int shift)				//true- ( A )
 {																//false- ( )
-	for(int i=shift;i<text.size()&&text[i]!=')';i++)			
+	for(int i=shift;i<text.size()&&((text[i])!=')');i++)			
 		{
-			if(text[i]!=' ')
+			if((text[i])!=' ')
 			return true;
 		}
 	return false;
