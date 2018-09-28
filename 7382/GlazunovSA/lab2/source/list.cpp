@@ -15,19 +15,21 @@ class Mylist
 private:
 	struct el_of_list*el;
 	struct el_of_list* list;
+	struct el_of_list*el1;
 	int size_;
 public:
 	Mylist()
 	{
-		list = new struct el_of_list;
-		list->left=NULL;
+		list = new struct el_of_list;			//if's first element of list
+		list->left=NULL;						//
 		list->right=NULL;
 		el = list;
+		el1=list;
 		size_=0;
 	}
 	~Mylist()
 	{
-			delete_list(list);
+			delete_list(el1);//delete all elements of list
 	}
 	int size()
 	{
@@ -35,7 +37,7 @@ public:
 	}
 	void push(char symbol,bool next_symbol)
 	{
-		if(symbol=='(')
+		if(symbol=='(')								//if next_symbol==true it's mean pad_of_brackets++
 		{
 			el->left=new struct left_bracket;
 			el->right=NULL;
@@ -55,7 +57,7 @@ public:
 			el->right=NULL;
 		}
 	}
-	int count()
+	int count()													//this function return pad_of_brackets using the  'is_atom' from struct left_bracket
 	{
 		if(list->left==NULL&&list->right==NULL)
 			return 0;

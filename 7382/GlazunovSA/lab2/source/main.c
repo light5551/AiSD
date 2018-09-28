@@ -2,8 +2,8 @@
 #include <string>
 #include <cstdio>
 #include "list.cpp"//class,where there is list :)
-#define SCRIPT_TEST
-//#define TEST_ALG
+//#define SCRIPT_TEST
+#define TEST_ALG
 bool check_next_symbol(std::string &text,int shift)				//true- ( A )
 {																//false- ( )
 	for(int i=shift;i<text.size()&&((text[i])!=')');i++)			
@@ -40,19 +40,25 @@ return false;
 
 int main(){
 Mylist stk;
-bool first_correct_bracket=false;
+bool first_correct_bracket=false;							
 #ifndef SCRIPT_TEST
 std::cout<<"Hello,I am checker of brackets.Enter..."<<std::endl;
 #endif
-std::string text=input();
+std::string text=input();				//read text
 int pad=0;
 if(first_correct_bracket=istextcorrect(text))
 for(int i=0;i<text.size();i++)
 {
 	#ifdef TEST_ALG
-	std::cout<<"size of list:"<<stk.size()<<std::endl
-	<<"depth of brackets:"<<pad<<std::endl
-	<<"symbol= "<<text[i]<<std::endl;
+	for(int j = 0;j<pad*3;j++)
+	{std::cout<<" ";}
+	std::cout
+	<<"depth of brackets:"<<pad<<std::endl;
+	for(int j = 0;j<pad*3;j++)
+	{std::cout<<" ";}
+
+		std::cout<<"symbol= "<<text[i]<<std::endl<<"___________________________________"<<std::endl;
+	
 	#endif
 	if(text[i]=='(')
 	{
@@ -60,7 +66,9 @@ for(int i=0;i<text.size();i++)
 
 				#ifdef TEST_ALG
 					if(check_next_symbol(text,i+1))
-						pad++;
+						{
+							pad++;
+						}
 				#endif
 	}
 	if(text[i]==')')
@@ -79,7 +87,7 @@ for(int i=0;i<text.size();i++)
     		fclose(f);
  			return 0;
  			#else
- 			std::cout<<"result="<<stk.count()<<std::endl;
+ 			std::cout<<"RESULT="<<stk.count()<<std::endl;
  			return 0;
  			#endif
 		}
