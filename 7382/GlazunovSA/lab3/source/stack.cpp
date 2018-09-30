@@ -6,15 +6,15 @@ template <typename T>
 class Mystack
 {
 public:
-	Mystack( int = START_SIZE_OF_STACK );
+	Mystack(int); //these are public fields :)
 	~Mystack();
-	bool empty();
+	bool is_empty();
 	int size();
 	T top();
 	T pop();
 	void push(T);
 
-private:
+private:		//these are private
 	T *array;
 	int size_of_array,
 		length;
@@ -22,16 +22,7 @@ private:
 };
 
 template <typename T>
-void Mystack<T>::resize(){
-	/*int cur_size = size_of_array + START_SIZE_OF_STACK ;
-	T* cur_array = new T[cur_size];
-	memset(cur_array , 0 , sizeof(T)*cur_size);
-	std::cerr<<cur_array<<std::endl;
-	std::copy(array , array + size_of_array + 1 , cur_array);
-	delete [] array;
-	array = cur_array;
-	size_of_array += START_SIZE_OF_STACK;
-*/
+void Mystack<T>::resize(){										//this is stupid function in style C because we cant use vector!!!
 	array=(T*)realloc(array,size_of_array+START_SIZE_OF_STACK);
 	size_of_array += START_SIZE_OF_STACK;
 }
@@ -44,7 +35,7 @@ Mystack<T>::~Mystack()
 template <typename T>
 Mystack<T>::Mystack(int size)
 {
-    size_of_array = size > 0 ? size : 10;   
+    size_of_array = size > 0 ? size : START_SIZE_OF_STACK; //if size > 0 - it's,else size equal START_SIZE_OF_STACK
     array = new T[size_of_array]; 
     length = -1; 
 }
@@ -55,10 +46,10 @@ void Mystack<T>::push(T value)
 	{
 		resize();
 	}
-	array[++length]=value;
+	array[++length]=value;//++ is prefix because in the beginning length == -1 and we cant use this like index of array
 }
 template <typename T>
-bool Mystack<T>::empty()
+bool Mystack<T>::is_empty()
 {
 	if(length<=-1)
 		return true;
@@ -72,7 +63,7 @@ int Mystack<T>::size()
 template <typename T>
 T Mystack<T>::top()
 {
-	if(!empty())
+	if(!is_empty())
 		return array[length];
 	std::cout<<std::endl<<"ERROR!!!"<<std::endl;
 	exit(0);

@@ -7,7 +7,7 @@ int main(){
 	getline(std::cin,text);
 	for(int i=0;i<text.size();i++)
 	{
-		stack.push(text[i]);
+		stack.push(text[i]);				//increase stack
 	}
 	for(int i=0;i<text.size();i++)
 	{
