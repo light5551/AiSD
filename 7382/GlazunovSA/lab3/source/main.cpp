@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include "stack.cpp"
-//#define TEST
-#define SCRIPT
+#define TEST
+//#define SCRIPT
 int main(){
 	Mystack<char> stack(10);
 	std::string text;
@@ -36,7 +36,10 @@ int main(){
 					std::cout<<"POP"<<"   ";
 					std::cout<<"TOP:"<<stack.top()<<"  ";
 					std::cout<<"SIZE:"<<stack.size()<<std::endl;
-					stack.pop();
+					stack.top();
+					std::ofstream file("result_lab3.txt",std::ios::app);
+    				file << stack.pop();
+    				file.close();
 				#else 
 							#ifndef SCRIPT	
 								std::cout<<stack.pop();

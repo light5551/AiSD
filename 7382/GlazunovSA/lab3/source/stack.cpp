@@ -25,10 +25,10 @@ private:		//these are private
 template <typename T>
 void Mystack<T>::resize(){										//this is stupid function in style C because we cant use vector!!!
 																//this func increase array...					
-	T* time_array = new T[size_of_array];
-	std::memcpy(time_array,array,( size_of_array )*sizeof(T));
-	delete []  array;
-	array = new T[size_of_array + START_SIZE_OF_STACK ];
+	T* time_array = new T[size_of_array];						//in start we should copy memory from main array to time_array
+	std::memcpy(time_array,array,( size_of_array )*sizeof(T));  //after we delete array and new array but buffer is bigger then last array
+	delete []  array;											//and after we again copy memory but in another side
+	array = new T[size_of_array + START_SIZE_OF_STACK ];		
 	std::memcpy(array,time_array,( size_of_array )*sizeof(T));
 	delete [] time_array;
 	size_of_array += START_SIZE_OF_STACK;
