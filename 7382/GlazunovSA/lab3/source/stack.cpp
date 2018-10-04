@@ -7,6 +7,7 @@ class Mystack
 {
 public:
 	Mystack(int); //these are public fields :)
+	Mystack();
 	~Mystack();
 	bool is_empty();
 	int size();
@@ -23,19 +24,32 @@ private:		//these are private
 
 template <typename T>
 void Mystack<T>::resize(){										//this is stupid function in style C because we cant use vector!!!
-	array=(T*)realloc(array,size_of_array+START_SIZE_OF_STACK);
+																//this func increase array...					
+	T* time_array = new T[size_of_array];
+	std::memcpy(time_array,array,( size_of_array )*sizeof(T));
+	delete []  array;
+	array = new T[size_of_array + START_SIZE_OF_STACK ];
+	std::memcpy(array,time_array,( size_of_array )*sizeof(T));
+	delete [] time_array;
 	size_of_array += START_SIZE_OF_STACK;
 }
 
 template <typename T>
 Mystack<T>::~Mystack()
 {
-    delete [] array;    
+	 delete [] array;    
 }
 template <typename T>
 Mystack<T>::Mystack(int size)
 {
     size_of_array = size > 0 ? size : START_SIZE_OF_STACK; //if size > 0 - it's,else size equal START_SIZE_OF_STACK
+    array = new T[size_of_array]; 
+    length = -1; 
+}
+template <typename T>
+Mystack<T>::Mystack()
+{
+    size_of_array =  START_SIZE_OF_STACK; 
     array = new T[size_of_array]; 
     length = -1; 
 }
@@ -71,7 +85,7 @@ T Mystack<T>::top()
 template <typename T>
 T Mystack<T>::pop()
 {
-	int total=top();
+	T total=top();
 	length--;
 	return total;
 }
