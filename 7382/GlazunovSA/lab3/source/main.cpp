@@ -2,12 +2,22 @@
 #include <fstream>
 #include "stack.cpp"
 //#define TEST
-#define SCRIPT
+//#define SCRIPT
 int main(){
 	Mystack<char> stack(10);
 	std::string text;
+	#ifndef TEST
+	#ifndef SCRIPT
+	std::cout<<"this is stack.Enter...(for example: ados->stack->soda)"<<std::endl;
+	#endif
+	#endif
 	getline(std::cin,text);
-	#ifdef TEST 
+
+
+	#ifdef TEST
+					#ifndef SCRIPT
+					std::cout<<"this is stack.Enter...(for example: ados->stack->soda)"<<std::endl;
+					#endif 
 	std::cout<<"START PUSHING!!!"<<std::endl; 
 	#endif
 	for(int i=0;i<text.size();i++)
@@ -31,7 +41,7 @@ int main(){
 							#ifndef SCRIPT	
 								std::cout<<stack.pop();
 							#else
-								std::ofstream file("output_of_lab3.txt",std::ios::app);
+								std::ofstream file("output_of_lab3.txt",std::lsios::app);
     							file << stack.pop();
     							//std::ofstream("1.txt", ios::app);
     							//f<<"the last string";
