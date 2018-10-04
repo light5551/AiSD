@@ -2,7 +2,7 @@
 #include <fstream>
 #include "stack.cpp"
 //#define TEST
-//#define SCRIPT
+#define SCRIPT
 int main(){
 	Mystack<char> stack(10);
 	std::string text;
@@ -41,10 +41,8 @@ int main(){
 							#ifndef SCRIPT	
 								std::cout<<stack.pop();
 							#else
-								std::ofstream file("output_of_lab3.txt",std::lsios::app);
+								std::ofstream file("output_of_lab3.txt",std::ios::app);
     							file << stack.pop();
-    							//std::ofstream("1.txt", ios::app);
-    							//f<<"the last string";
     							file.close();
 							#endif
 				#endif
